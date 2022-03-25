@@ -1,0 +1,17 @@
+server:
+  port: 8080
+cloud:
+  gateway:
+    discovery:
+      locator:
+        enabled: true
+        lower-case-service-id: true
+    routes:
+      - id: movie-service
+        uri: lb://movie-service
+        predicates:
+          - Path=/movie-service/**
+      - id: catalog-service
+        uri: lb://catalog-service
+        predicates:
+          - Path=/catalog-service/**
